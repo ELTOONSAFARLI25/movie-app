@@ -4,6 +4,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { red } from "@mui/material/colors";
 const Card = ({
   card,
   favArr,
@@ -11,8 +13,10 @@ const Card = ({
   setIsVisibleWL,
   watchLaterState,
   setWatchLaterState,
+  usersData,
 }) => {
   const [isFav, setIsFav] = useState(false);
+  const [updatedUser, setUpdatedUser] = useState([]);
   let test = false;
   if (favArr.find((elem) => elem.id == card.id)) {
     test = true;
@@ -21,6 +25,7 @@ const Card = ({
     setIsFav(test);
   }, [favArr]);
   const [isWatchLater, setIsWatchLater] = useState(false);
+
   let test2 = false;
   if (watchLaterState.find((elem) => elem.id == card.id)) {
     test2 = true;
@@ -30,6 +35,9 @@ const Card = ({
       setIsWatchLater(test2);
     }
   }, [watchLaterState]);
+  let logedUser = JSON.parse(localStorage.getItem("logedUser"));
+  const usersURL = "https://669f8faab132e2c136fe57d0.mockapi.io/users";
+  let user;
 
   return (
     <>
@@ -41,20 +49,28 @@ const Card = ({
         />
         <div className={cardCss.buttons}>
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              if (!favArr.find((elem) => elem.id == card.id)) {
-                favArr.push(card);
+            onClick={() => {
+              usersData.forEach((elem) => {
+                if (elem.email == logedUser.email) {
+                  user = elem;
+                }
+              });
+              if (!user?.favs.find((elem) => elem.id == card.id)) {
+                // favArr.push(card);
+                user.favs.push(card);
                 setIsFav(true);
                 setIsVisible(true);
                 setTimeout(() => {
                   setIsVisible(false);
                 }, 3000);
               } else {
-                favArr = favArr.filter((elem) => elem.id != card.id);
+                user.favs = user.favs.filter((elem) => elem.id != card.id);
+                // favArr = favArr.filter((elem) => elem.id != card.id);
                 setIsFav(false);
               }
-              localStorage.setItem("favs", JSON.stringify(favArr));
+              console.log(user);
+              axios.put(`${usersURL}/${user.id}`, user);
+              // localStorage.setItem("favs", JSON.stringify(favArr));
             }}
           >
             {" "}
@@ -84,7 +100,6 @@ const Card = ({
                 "watchLater",
                 JSON.stringify(watchLaterState)
               );
-              console.log(watchLaterState);
             }}
           >
             <WatchLaterIcon

@@ -1,0 +1,143 @@
+.registerBody {
+  background-color: #160a0a;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("https://images7.alphacoders.com/111/thumb-1920-1115466.jpg")
+    no-repeat center center;
+  background-size: cover;
+}
+.home_link {
+  text-decoration: underline;
+  position: absolute;
+  left: 20px;
+  top: -40px;
+  color: white;
+  font-size: larger;
+  font-weight: 600;
+}
+.container {
+  margin: auto;
+  border: 1px solid black;
+  padding: 40px;
+  width: 500px;
+  /* margin-top: 120px; */
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #3f3d36;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: white;
+  background-color: rgba(2, 10, 10, 0.28);
+  border: 1px solid white;
+  backdrop-filter: blur(10px);
+}
+.form_container {
+  display: flex;
+  flex-direction: column;
+  /* gap: 5px; */
+  font-size: 17px;
+}
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.inputDiv input {
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 17px;
+  background-color: rgba(200, 200, 200, 0.6);
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.inputDiv input::placeholder {
+  color: rgb(58, 58, 58);
+}
+.error_message {
+  margin-top: 2px;
+  margin-bottom: 3px;
+  height: 17px;
+}
+.error_message p {
+  color: rgb(217, 53, 53);
+  font-size: 15.5px;
+  font-weight: 700;
+  font-style: bold;
+}
+.form_links {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(0, 156, 253);
+}
+.register_btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 15px;
+  cursor: pointer;
+  border: none;
+  background-color: gold;
+  border-radius: 6px;
+  font-size: larger;
+  font-weight: 600;
+}
+.register_btn:active {
+  background-color: rgb(241, 221, 109);
+}
+.form_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 7px;
+}
+.visibility_icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: white;
+}
+.alert_div,
+.wrong_email_alert {
+  position: absolute;
+  top: 10px;
+}
+.show_alert {
+  animation: slideIn 0.5s ease-out forwards;
+}
+.hide_alert {
+  animation: slideOut 0.5s ease-out forwards;
+}
+@keyframes slideIn {
+  0% {
+    top: -100px;
+  }
+  50% {
+    top: -45px;
+  }
+  100% {
+    top: 10px;
+  }
+}
+@keyframes slideOut {
+  0% {
+    top: 10px;
+  }
+  50% {
+    top: -45px;
+  }
+  100% {
+    top: -100px;
+  }
+}

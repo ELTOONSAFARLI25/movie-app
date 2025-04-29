@@ -14,6 +14,7 @@ const Category = ({
   setIsVisibleWL,
   watchLaterState,
   setWatchLaterState,
+  usersData,
 }) => {
   const [apiData, setApiData] = useState([]);
   const options = {
@@ -57,6 +58,7 @@ const Category = ({
                       setIsVisibleWL={setIsVisibleWL}
                       watchLaterState={watchLaterState}
                       setWatchLaterState={setWatchLaterState}
+                      usersData={usersData}
                     />
                   </SwiperSlide>
                 );

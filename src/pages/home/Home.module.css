@@ -92,7 +92,7 @@
   padding: 30px;
   margin-top: 50px;
 }
-.qeuryResults {
+.queryResults {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;

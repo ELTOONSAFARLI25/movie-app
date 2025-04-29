@@ -10,6 +10,8 @@ const WatchLaterCard = ({
   watchLaterArr,
   setFavArrState,
   favArr,
+  queryWatchLaterData,
+  setQueryWatchLaterData,
 }) => {
   return (
     <>
@@ -21,10 +23,18 @@ const WatchLaterCard = ({
         <div className={css.buttons}>
           <button
             onClick={(e) => {
+              if (queryWatchLaterData?.length > 0) {
+                console.log(queryWatchLaterData);
+                queryWatchLaterData = queryWatchLaterData.filter(
+                  (elem) => elem.id != card.id
+                );
+                setQueryWatchLaterData(queryWatchLaterData);
+              }
               watchLaterArr = watchLaterArr.filter(
                 (elem) => elem.id != card.id
               );
               localStorage.setItem("watchLater", JSON.stringify(watchLaterArr));
+              console.log();
               setWatchLaterState(watchLaterArr);
             }}
           >

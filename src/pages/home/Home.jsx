@@ -7,8 +7,8 @@ import LoopIcon from "@mui/icons-material/Loop";
 import Category from "../../components/category/Category";
 import { Alert } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
-
 import Card from "../../components/card/Card";
+import axios from "axios";
 const Home = ({ queryData, setQueryData, queryTxt }) => {
   let favArr = [];
   let localFavArr = JSON.parse(localStorage.getItem("favs"));
@@ -27,9 +27,16 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
   }, []);
   const [isVisible, setIsVisible] = useState(false);
   const [isVisibleWL, setIsVisibleWL] = useState(false);
+  const usersURL = "https://669f8faab132e2c136fe57d0.mockapi.io/users";
+  const [usersData, setUsersData] = useState([]);
+  useEffect(() => {
+    axios(usersURL).then((res) => {
+      setUsersData(res.data);
+    });
+  }, []);
   return (
     <>
-      {queryData?.length > 0 ? (
+      {queryData && queryData?.length > 0 ? (
         <>
           <div className={homeCss.queryContainer}>
             <div className={homeCss.queryHeader}>
@@ -55,7 +62,7 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
               </Button>
             </div>
 
-            <div className={homeCss.qeuryResults}>
+            <div className={homeCss.queryResults}>
               {queryData &&
                 queryData.map((elem) => {
                   return (
@@ -67,6 +74,7 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
                       setIsVisibleWL={setIsVisibleWL}
                       watchLaterState={watchLaterState}
                       setWatchLaterState={setWatchLaterState}
+                      usersData={usersData}
                     />
                   );
                 })}
@@ -145,6 +153,7 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
               setIsVisibleWL={setIsVisibleWL}
               watchLaterState={watchLaterState}
               setWatchLaterState={setWatchLaterState}
+              usersData={usersData}
             />
             <Category
               category="popular"
@@ -153,6 +162,7 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
               setIsVisibleWL={setIsVisibleWL}
               watchLaterState={watchLaterState}
               setWatchLaterState={setWatchLaterState}
+              usersData={usersData}
             />
             <Category
               category="top_rated"
@@ -161,6 +171,7 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
               setIsVisibleWL={setIsVisibleWL}
               watchLaterState={watchLaterState}
               setWatchLaterState={setWatchLaterState}
+              usersData={usersData}
             />
             <Category
               category="upcoming"
@@ -169,6 +180,7 @@ const Home = ({ queryData, setQueryData, queryTxt }) => {
               setIsVisibleWL={setIsVisibleWL}
               watchLaterState={watchLaterState}
               setWatchLaterState={setWatchLaterState}
+              usersData={usersData}
             />
           </div>
         </>

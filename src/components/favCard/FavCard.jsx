@@ -7,8 +7,10 @@ const FavCard = ({
   card,
   favArr,
   setFavArrState,
-  wathcLaterArr,
+  watchLaterArr,
   setWatchLaterState,
+  queryFavData,
+  setQueryFavData,
 }) => {
   return (
     <>
@@ -20,6 +22,12 @@ const FavCard = ({
         <div className={favCardCss.buttons}>
           <button
             onClick={(e) => {
+              if (queryFavData?.length > 0) {
+                queryFavData = queryFavData.filter(
+                  (elem) => elem.id != card.id
+                );
+                setQueryFavData(queryFavData);
+              }
               favArr = favArr.filter((elem) => elem.id != card.id);
               localStorage.setItem("favs", JSON.stringify(favArr));
               setFavArrState(favArr);
@@ -29,20 +37,20 @@ const FavCard = ({
           </button>
           <button
             onClick={() => {
-              if (!wathcLaterArr.find((elem) => elem.id == card.id)) {
-                wathcLaterArr.push(card);
+              if (!watchLaterArr.find((elem) => elem.id == card.id)) {
+                watchLaterArr.push(card);
               } else {
-                wathcLaterArr = wathcLaterArr.filter(
+                watchLaterArr = watchLaterArr.filter(
                   (elem) => elem.id != card.id
                 );
               }
-              setWatchLaterState(wathcLaterArr);
-              localStorage.setItem("watchLater", JSON.stringify(wathcLaterArr));
+              setWatchLaterState(watchLaterArr);
+              localStorage.setItem("watchLater", JSON.stringify(watchLaterArr));
             }}
           >
             <WatchLaterIcon
               style={
-                wathcLaterArr.find((elem) => elem.id == card.id)
+                watchLaterArr.find((elem) => elem.id == card.id)
                   ? { color: "green" }
                   : { color: "inherit" }
               }
